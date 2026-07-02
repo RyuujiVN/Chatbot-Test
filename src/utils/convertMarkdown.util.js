@@ -3,6 +3,7 @@ import TurndownService from 'turndown';
 import path from 'path';
 import fs from 'fs';
 import crypto from "crypto"
+import { logger } from "./logger";
 
 const ZENDESK_BASE_URL = 'https://support.optisigns.com';
 const turndownService = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' })
@@ -25,6 +26,7 @@ function slugify(title) {
 }
 
 function convertHtmlToMarkdown(html) {
+  // Remove script, style, nav element
   turndownService.remove(['script', 'style', 'nav'])
   return turndownService.turndown(html)
 }
@@ -32,7 +34,10 @@ function convertHtmlToMarkdown(html) {
 export async function scrapeAndSaveArticles() {
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR)
 
+  logger.info("Fetching articles from Zendesk...")
   const articles = await fetchAllArticles()
+  logger.success(`Fetched success ${articles.length} articles`)
+
   const manifest = {}
 
   for (const article of articles) {
@@ -52,8 +57,8 @@ export async function scrapeAndSaveArticles() {
   }
 
   fs.writeFileSync(path.join(import.meta.dirname, 'manifest.json'), JSON.stringify(manifest, null, 2), 'utf-8')
-  
-  console.log(`Saved ${articles.length} markdown files`)
+
+  logger.success(`Saved ${articles.length} markdown files`)
 
   return manifest
 }

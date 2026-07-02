@@ -1,10 +1,11 @@
 import express from 'express';
-import { scrapeAndSaveArticles } from './convertMarkdown.js';
+import 'dotenv/config'
+
 const app = express();
 const port = 3000;
 
 app.get('/', async (req, res) => {
-  await scrapeAndSaveArticles()
+  // await scrapeAndSaveArticles()
   res.send("Hello");
 });
 
