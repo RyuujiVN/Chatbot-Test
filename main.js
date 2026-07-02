@@ -17,7 +17,6 @@ async function main() {
 
   app.listen(PORT, () => {
     logger.success(`Server running on port ${PORT}`);
-    logger.info(`POST http://localhost:${PORT}/chat`);
   });
 }
 
