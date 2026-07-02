@@ -4,7 +4,7 @@ import { scrapeAndSaveArticles } from "./src/jobs/scrapeAndSave.job.js";
 import { logger } from "./src/utils/logger.js";
 import { runUploader } from "./src/jobs/uploader.job.js";
 
-const PORT = process.env.PORT || 3000;
+
 
 async function main() {
   logger.info("=== Job started ===");
@@ -15,9 +15,8 @@ async function main() {
   // Compare delta and upload new/change to Vector Store
   await runUploader(manifest)
 
-  app.listen(PORT, () => {
-    logger.success(`Server running on port ${PORT}`);
-  });
+  logger.info("=== Job done ===");
+  process.exit(0)
 }
 
 main().catch((err) => {
