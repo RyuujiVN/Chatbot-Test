@@ -91,3 +91,21 @@ Embedding model: text-embedding-3-large at 256 dimensions.
 Maximum number of chunks added to context: 20 (could be fewer).
 Each Markdown article should include an `Article URL:` line so the assistant can cite its source when answering.
 
+## Daily Job Log
+
+The daily scrape and upload job runs automatically every day at 02:00 AM via GitHub Actions.
+
+Each run:
+- Re-scrapes all articles from the OptiSigns Help Center
+- Compares content hashes against the previous run to detect changes
+- Uploads only new or modified articles to the OpenAI Vector Store (delta update)
+- Logs the result: `added / updated / skipped`
+
+To view the latest run log:
+1. Go to the **Actions** tab in this repository
+2. Click on the latest **Daily Scrape & Upload** workflow run
+3. Open the **run-job** job
+4. Expand the **Run container** step to see the full output
+
+Latest run log:
+https://github.com/RyuujiVN/Chatbot-Test/actions/runs/28576228370/job/84725329830
