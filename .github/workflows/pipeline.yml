@@ -5,7 +5,7 @@ name: Daily Scrape & Upload
 
 on:
   schedule:
-    - cron: '0 15 * * *'
+    - cron: "0 15 * * *"
   workflow_dispatch:
 
 jobs:
@@ -13,16 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      
-    - name: Build docker image
-      run: docker build -t optibot .
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Run container
-      run: |
-        docker run \
-        -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
-        -e ASSISTANT_ID=${{ secrets.ASSISTANT_ID }} \
-        -e VECTOR_STORE_ID=${{ secrets.VECTOR_STORE_ID }} \
-        optibot
+      - name: Build docker image
+        run: docker build -t optibot .
+
+      - name: Run container
+        run: |
+          docker run \
+          -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
+          -e ASSISTANT_ID=${{ secrets.ASSISTANT_ID }} \
+          -e VECTOR_STORE_ID=${{ secrets.VECTOR_STORE_ID }} \
+          optibot

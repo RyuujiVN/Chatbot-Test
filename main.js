@@ -1,5 +1,4 @@
 import "dotenv/config";
-import app from "./app.js";
 import { scrapeAndSaveArticles } from "./src/jobs/scrapeAndSave.job.js";
 import { logger } from "./src/utils/logger.js";
 import { runUploader } from "./src/jobs/uploader.job.js";

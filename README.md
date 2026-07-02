@@ -91,6 +91,3 @@ Embedding model: text-embedding-3-large at 256 dimensions.
 Maximum number of chunks added to context: 20 (could be fewer).
 Each Markdown article should include an `Article URL:` line so the assistant can cite its source when answering.
 
-## Daily Job Log
-
-[Add your Render Cron Job log link here after deployment]
