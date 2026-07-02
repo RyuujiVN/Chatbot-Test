@@ -27,21 +27,7 @@ const uploadFiletoVectorStore = async () => {
   // 1. Create vector store
   const vectorStore = await createVectorStore();
 
-  // 2. Get the list of files
-  const files = fs.readdirSync(ARTICLES_DIR);
-
-  const fileStreams = files.map((file) => fs.createReadStream(path.join(ARTICLES_DIR, file)))
-
-
-  // 3. Upload and attach file to the vector store
-  const fileBatch = await openAI.vectorStores.fileBatches.uploadAndPoll(vectorStore.id, {
-    files: fileStreams
-  })
-
-  logger.info("Batch status: ", fileBatch.status)
-  logger.info("File counts: ", fileBatch.file_counts)
-
-  // 4. Create Assistant and attach vector store
+  // 2. Create Assistant and attach vector store
   const assistant = await openAI.beta.assistants.create({
     name: "OptiSigns AI Support",
     model: "gpt-4o-mini",

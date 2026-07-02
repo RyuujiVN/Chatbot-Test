@@ -45,7 +45,6 @@ export async function runUploader(manifest) {
     const info = manifest[slug]
     const fileId = await uploadFile(info.file)
     state[slug] = { hash: info.hash, openaiFileId: fileId }
-    console.log("chạy vào đayy")
   }
 
   // Delete old file and upload changed articles
